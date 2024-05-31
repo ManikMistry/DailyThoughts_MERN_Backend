@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const dotenv=require('dotenv')
 const cors = require('cors');
 const multer = require('multer');
 const path = require("path");
@@ -10,17 +10,12 @@ const authRoute = require('./routes/auth');
 const userRoute = require('./routes/users');
 const postRoute = require('./routes/posts');
 const commentRoute = require('./routes/comments');
-
-// Load environment variables
-dotenv.config();
-
-console.log("MONGO_URL:", process.env.MONGO_URL);
-console.log("PORT:", process.env.PORT);
+const BASE_URL=process.env.BASE_URL;
 
 // Database connection
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+        await mongoose.connect(process.env.MONGO_URL);
         console.log("Database is connected successfully!");
     } catch (err) {
         console.log(err);
@@ -28,9 +23,10 @@ const connectDB = async () => {
 };
 
 // Middlewares
+dotenv.config();
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "/images")));
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({ origin: BASE_URL, credentials: true }));
 app.use(cookieParser());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
