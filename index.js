@@ -11,6 +11,7 @@ const userRoute = require('./routes/users');
 const postRoute = require('./routes/posts');
 const commentRoute = require('./routes/comments');
 const BASE_URL=process.env.BASE_URL;
+const PORT=process.env.PORT || 5050
 
 // Database connection
 const connectDB = async () => {
@@ -49,7 +50,6 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 });
 
 // Start the server
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
     connectDB();
-    console.log("App is running on port " + process.env.PORT);
 });
