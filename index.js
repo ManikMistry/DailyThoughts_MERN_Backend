@@ -11,7 +11,7 @@ const userRoute = require('./routes/users');
 const postRoute = require('./routes/posts');
 const commentRoute = require('./routes/comments');
 const BASE_URL=process.env.BASE_URL;
-const PORT=process.env.PORT || 5050
+const PORT=process.env.PORT || 5173
 
 // Database connection
 const connectDB = async () => {
